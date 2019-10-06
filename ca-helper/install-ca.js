@@ -36,7 +36,7 @@ module.exports = function installCA() {
         return;
       }
 
-      console.log('✅ root ca installed.');
+      // console.log('✅ root ca installed.');
     });
   });
 }
