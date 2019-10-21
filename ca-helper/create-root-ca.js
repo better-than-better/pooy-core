@@ -8,7 +8,7 @@ const pooyDir = `${process.env.HOME}/.pooy`;
  * @param {String} domain
  * @param {NUmber} RSABits
  */
-module.exports = function createRootCA(domain = 'pooy.proxy', RSABits = 1024) {
+module.exports = function createRootCA(domain = 'pooy.proxy', RSABits =  2048) {
   const keys = forge.pki.rsa.generateKeyPair(RSABits);
   const cert = forge.pki.createCertificate();
 
