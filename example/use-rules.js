@@ -10,8 +10,10 @@ const rules = [{
   },
   response: {
     statusCode: 400,
-    body: (body) => {
-      return body.toString() + `<script>alert('FBI Warngin!!')</script>`;
+    body: async (getBody) => {
+      const originalBody = await getBody();
+
+      return originalBody.toString() + `<script>alert('FBI Warngin!!')</script>`;
     },
     headers: (headers) => ({...headers, 'proxy-agent': 'pooy'}),
     throttling: {

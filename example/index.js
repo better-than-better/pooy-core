@@ -1,6 +1,4 @@
 const Proxy = require('../');
-const fs = require('fs');
-
 const proxy = new Proxy();
 
 proxy.direct = false;
