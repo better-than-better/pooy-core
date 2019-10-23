@@ -3,7 +3,7 @@ const forge = require('node-forge');
 const CA_PREFIX = 'POOY';
 const pooyDir = `${process.env.HOME}/.pooy`;
 
-module.exports = function createFromRoot(domain = 'pooy@proxy', RSABits = 1024) {
+module.exports = function createFromRoot(domain = 'pooy.proxy', RSABits = 2048) {
 
   // pem file content
   const rootCAPem = fs.readFileSync(`${pooyDir}/${CA_PREFIX}_rootCA.crt`);
@@ -19,9 +19,9 @@ module.exports = function createFromRoot(domain = 'pooy@proxy', RSABits = 1024) 
   cert.publicKey = keys.publicKey;
   cert.serialNumber = (new Date()).getTime() + '';
   cert.validity.notBefore = new Date();
-  cert.validity.notBefore.setFullYear(cert.validity.notBefore.getFullYear() - 1);
+  cert.validity.notBefore.setFullYear(cert.validity.notBefore.getFullYear() - 5);
   cert.validity.notAfter = new Date();
-  cert.validity.notAfter.setFullYear(cert.validity.notAfter.getFullYear() + 1);
+  cert.validity.notAfter.setFullYear(cert.validity.notAfter.getFullYear() + 20);
 
   const attrs = [
     {
