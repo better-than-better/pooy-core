@@ -30,6 +30,7 @@
   },
   "homepage": "https://github.com/better-than-better/pooy-core#readme",
   "dependencies": {
+    "compare-versions": "^3.5.1",
     "multiparty": "^4.2.1",
     "node-forge": "^0.8.5",
     "ora": "^4.0.2",
