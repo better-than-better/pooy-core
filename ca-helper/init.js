@@ -1,17 +1,19 @@
 const fs = require('fs');
+const { execSync } = require('child_process');
 const ora = require('ora');
 const createRootCA = require('./create-root-ca');
 const installCA = require('./install-ca');
 const CA_PREFIX = 'POOY';
-const pooyDir = `${process.env.HOME}/.pooy`;
+const { BASE_DIR } = require('../config');
 
 module.exports = function caInit() {
   const spinner = ora('init root ca...').start();
-  const existsPrivateKey = fs.existsSync('${pooyDir}/${CA_PREFIX}_private_key.pem');
-  const existsPublicKey = fs.existsSync(`${pooyDir}/${CA_PREFIX}_key.pem`);
-  const existsCert = fs.existsSync(`${pooyDir}/${CA_PREFIX}_rootCA.crt`);
+  const existsPrivateKey = fs.existsSync(`${BASE_DIR}/${CA_PREFIX}_private_key.pem`);
+  const existsPublicKey = fs.existsSync(`${BASE_DIR}/${CA_PREFIX}_key.pem`);
+  const existsCert = fs.existsSync(`${BASE_DIR}/${CA_PREFIX}_rootCA.crt`);
 
   if (!existsPrivateKey || !existsPublicKey || !existsCert) {
+    execSync(`rm -rf ${BASE_DIR}/ssl`);
     createRootCA();
   }
 
