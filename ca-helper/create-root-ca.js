@@ -1,14 +1,13 @@
 const fs = require('fs');
 const forge = require('node-forge');
-const CA_PREFIX = 'POOY';
-const pooyDir = `${process.env.HOME}/.pooy`;
+const { BASE_DIR, CA_PREFIX, ROOT_CA_NAME } = require('../config');
 
 /**
  * 自建 CA
  * @param {String} domain
  * @param {NUmber} RSABits
  */
-module.exports = function createRootCA(domain = 'pooy.proxy', RSABits =  2048) {
+module.exports = function createRootCA(domain = ROOT_CA_NAME, RSABits =  2048) {
   const keys = forge.pki.rsa.generateKeyPair(RSABits);
   const cert = forge.pki.createCertificate();
 
@@ -75,13 +74,13 @@ module.exports = function createRootCA(domain = 'pooy.proxy', RSABits =  2048) {
     certificate: forge.pki.certificateToPem(cert)
   };
 
-  if (!fs.existsSync(pooyDir)) {
-    fs.mkdirSync(pooyDir);
+  if (!fs.existsSync(BASE_DIR)) {
+    fs.mkdirSync(BASE_DIR);
   }
 
-  fs.writeFileSync(`${pooyDir}/${CA_PREFIX}_private_key.pem`, pem.privateKey);
-  fs.writeFileSync(`${pooyDir}/${CA_PREFIX}_key.pem`, pem.publicKey);
-  fs.writeFileSync(`${pooyDir}/${CA_PREFIX}_rootCA.crt`, pem.certificate);
+  fs.writeFileSync(`${BASE_DIR}/${CA_PREFIX}_private_key.pem`, pem.privateKey);
+  fs.writeFileSync(`${BASE_DIR}/${CA_PREFIX}_key.pem`, pem.publicKey);
+  fs.writeFileSync(`${BASE_DIR}/${CA_PREFIX}_rootCA.crt`, pem.certificate);
 
   return pem;
 }

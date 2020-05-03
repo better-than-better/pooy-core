@@ -1,13 +1,12 @@
 const fs = require('fs');
 const forge = require('node-forge');
-const CA_PREFIX = 'POOY';
-const pooyDir = `${process.env.HOME}/.pooy`;
+const { BASE_DIR, CA_PREFIX } = require('../config');
 
 module.exports = function createFromRoot(domain = 'pooy.proxy', RSABits = 2048) {
 
   // pem file content
-  const rootCAPem = fs.readFileSync(`${pooyDir}/${CA_PREFIX}_rootCA.crt`);
-  const rootCAPrivateKeyPem = fs.readFileSync(`${pooyDir}/${CA_PREFIX}_private_key.pem`);
+  const rootCAPem = fs.readFileSync(`${BASE_DIR}/${CA_PREFIX}_rootCA.crt`);
+  const rootCAPrivateKeyPem = fs.readFileSync(`${BASE_DIR}/${CA_PREFIX}_private_key.pem`);
 
   // 拿到 rootCA 的信息
   const rootCA = forge.pki.certificateFromPem(rootCAPem);
@@ -103,6 +102,9 @@ module.exports = function createFromRoot(domain = 'pooy.proxy', RSABits = 2048) 
     publicKey: forge.pki.publicKeyToPem(keys.publicKey),
     certificate: forge.pki.certificateToPem(cert)
   };
+
+  // update to local
+  fs.writeFile(`${BASE_DIR}/ssl/${domain}`, JSON.stringify(pem), () => {});
 
   return pem;
 }

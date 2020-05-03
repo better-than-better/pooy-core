@@ -1,6 +1,6 @@
 {
   "name": "pooy-core",
-  "version": "0.0.2",
+  "version": "0.0.7",
   "description": "proxy from http",
   "main": "index.js",
   "directories": {

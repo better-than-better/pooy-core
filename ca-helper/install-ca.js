@@ -1,8 +1,7 @@
 const os = require('os');
 const { exec } = require('child_process');
-const pooyDir = `${process.env.HOME}/.pooy`;
-const ROOT_CA_NAME = 'pooy.proxy';
-const CA_PREFIX = 'POOY';
+const log = require('../log');
+const { BASE_DIR, CA_PREFIX, ROOT_CA_NAME } = require('../config');
 
 function command(CAPath, CAFileName, ROOT_CA_NAME) {
   const linux = {
@@ -20,23 +19,23 @@ function command(CAPath, CAFileName, ROOT_CA_NAME) {
 
 module.exports = function installCA() {
   const CAFileName = `${CA_PREFIX}_rootCA.crt`;
-  const CAPath = `${pooyDir}/${CAFileName}`;
+  const CAPath = `${BASE_DIR}/${CAFileName}`;
   const cmd = command(CAPath, CAFileName, ROOT_CA_NAME);
 
   // 因为每次生成的证书都是不一致的，确保证书能正常工作 所以 先删在装
   exec(cmd.remove, (err, stdout, stderr) => {
     if (err) {
-      console.log(err);
+      log('error', err);
       return;
     }
 
     exec(cmd.add, (err, stdout, stderr) => {
       if (err) {
-        console.log(err.message);
+        log('error', err);
         return;
       }
 
       // console.log('✅ root ca installed.');
     });
   });
-}
+};
