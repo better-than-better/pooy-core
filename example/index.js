@@ -36,12 +36,12 @@ proxy.on('response', async (ctx) => {
   // if (/html/.test(ctx.get('content-type'))) {
   //   ctx.throttling({ download: 1024 });
 
-    if (/html/.test(ctx.getHeader('content-type'))) {
-      const body = await ctx.getBody();
+    // if (/html/.test(ctx.getHeader('content-type'))) {
+    //   const body = await ctx.getBody();
 
-      ctx.body = body + '<script>console.log("0"); alert("FBI warning!"); console.log("?");</script>';
+    //   ctx.body = body + '<script>console.log("0"); alert("FBI warning!"); console.log("?");</script>';
 
-    }
+    // }
 
   //   ctx.removeHeader('content-security-policy');
 
