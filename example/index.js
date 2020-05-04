@@ -50,6 +50,6 @@ proxy.on('responseEnd', (ctx) => {
   // console.log(ctx.id, 'onResponseEnd', ctx.method, ctx.protocol, ctx.host, ctx.url);
 });
 
-proxy.listen(4002, () => {
+proxy.listen(9009, () => {
   console.log('proxy server start...\n');
 });
