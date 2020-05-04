@@ -35,18 +35,27 @@ proxy.on('requestEnd', (ctx) => {
 proxy.on('response', async (ctx) => {
   // if (/html/.test(ctx.get('content-type'))) {
   //   ctx.throttling({ download: 1024 });
-  //   const body = await ctx.getBody();
+
+    if (/html/.test(ctx.getHeader('content-type'))) {
+      const body = await ctx.getBody();
+
+      ctx.body = body + '<script>console.log("0"); alert("FBI warning!"); console.log("?");</script>';
+
+    }
 
   //   ctx.removeHeader('content-security-policy');
 
-  //   ctx.body = body + '<script>console.log("0"); alert("FBI warning!"); console.log("?");</script>';
+  // console.log(body.toString());
+
   // }
   
   ctx.setHeader('proxy-agent', 'pooy');
   // console.log(ctx.id, 'onResponse', ctx.method, ctx.protocol, ctx.host, ctx.url);
 });
 
-proxy.on('responseEnd', (ctx) => {
+proxy.on('responseEnd', async (ctx) => {
+
+  // console.log(await ctx.getBody());
   // console.log(ctx.id, 'onResponseEnd', ctx.method, ctx.protocol, ctx.host, ctx.url);
 });
 

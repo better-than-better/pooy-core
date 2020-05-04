@@ -1,6 +1,6 @@
 const fs = require('fs');
-const log  = require('../log');
 const { BASE_DIR } = require('../config');
+const log  = require('../log');
 
 function readLocal(hostname) {
   return new Promise((resolve, reject) => {

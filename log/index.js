@@ -27,7 +27,7 @@ module.exports = (type = 'warn', err, extra = '') => {
     const ms = now.getMilliseconds();
     const num = n => `0000000${n}`.slice(-2);
 
-    return `[${num(year)}-${num(month)}-${num(day)} ${num(h)}:${num(m)}:${s}:${ms}]`;
+    return `[${year}-${num(month)}-${num(day)} ${num(h)}:${num(m)}:${s}:${ms}]`;
   };
 
   if (!fs.existsSync(logfile)) {

@@ -16,7 +16,7 @@ module.exports = function createRootCA(domain = ROOT_CA_NAME, RSABits =  2048) {
   cert.validity.notBefore = new Date();
   cert.validity.notBefore.setFullYear(cert.validity.notBefore.getFullYear() - 5);
   cert.validity.notAfter = new Date();
-  cert.validity.notAfter.setFullYear(cert.validity.notBefore.getFullYear() + 20);
+  cert.validity.notAfter.setFullYear(cert.validity.notBefore.getFullYear() + 30);
 
   const attrs = [
     {
@@ -83,4 +83,4 @@ module.exports = function createRootCA(domain = ROOT_CA_NAME, RSABits =  2048) {
   fs.writeFileSync(`${BASE_DIR}/${CA_PREFIX}_rootCA.crt`, pem.certificate);
 
   return pem;
-}
+};
