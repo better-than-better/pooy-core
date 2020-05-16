@@ -1,3 +1,10 @@
+## [0.1.0] - 2020-05-16
+
+### Updated
+
+- update dependencies packages
+- update config file `config/index.js`
+
 ## [0.0.9] - 2020-05-04
 
 ### Fixed

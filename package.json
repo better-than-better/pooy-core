@@ -1,7 +1,7 @@
 {
   "name": "pooy-core",
-  "version": "0.0.9",
-  "description": "proxy from http",
+  "version": "0.1.0",
+  "description": "http/https proxy",
   "main": "index.js",
   "directories": {
     "lib": "lib"
@@ -30,10 +30,10 @@
   },
   "homepage": "https://github.com/better-than-better/pooy-core#readme",
   "dependencies": {
-    "compare-versions": "^3.5.1",
+    "compare-versions": "^3.6.0",
     "multiparty": "^4.2.1",
-    "node-forge": "^0.8.5",
-    "ora": "^4.0.2",
-    "statuses": "^1.5.0"
+    "node-forge": "^0.9.1",
+    "ora": "^4.0.4",
+    "statuses": "^2.0.0"
   }
 }

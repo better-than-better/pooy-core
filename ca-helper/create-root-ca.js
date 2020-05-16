@@ -74,10 +74,6 @@ module.exports = function createRootCA(domain = ROOT_CA_NAME, RSABits =  2048) {
     certificate: forge.pki.certificateToPem(cert)
   };
 
-  if (!fs.existsSync(BASE_DIR)) {
-    fs.mkdirSync(BASE_DIR);
-  }
-
   fs.writeFileSync(`${BASE_DIR}/${CA_PREFIX}_private_key.pem`, pem.privateKey);
   fs.writeFileSync(`${BASE_DIR}/${CA_PREFIX}_key.pem`, pem.publicKey);
   fs.writeFileSync(`${BASE_DIR}/${CA_PREFIX}_rootCA.crt`, pem.certificate);

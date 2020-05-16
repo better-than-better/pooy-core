@@ -1,9 +1,5 @@
 const fs = require('fs');
-const { LOG_PATH } = require('../config');
-
-if (!fs.existsSync(LOG_PATH)) {
-  fs.mkdirSync(LOG_PATH);
-}
+const { LOG_DIR } = require('../config');
 
 /**
  * 简单处理下 错误日志
@@ -14,7 +10,7 @@ if (!fs.existsSync(LOG_PATH)) {
 module.exports = (type = 'warn', err, extra = '') => {
   process.env.DEBUG && console.log(err);
 
-  const logfile = `${LOG_PATH}/${type}.log`;
+  const logfile = `${LOG_DIR}/${type}.log`;
 
   const date = () => {
     const now = new Date();

@@ -4,7 +4,7 @@ const ora = require('ora');
 const createRootCA = require('./create-root-ca');
 const installCA = require('./install-ca');
 const CA_PREFIX = 'POOY';
-const { BASE_DIR } = require('../config');
+const { BASE_DIR, SSL_DIR } = require('../config');
 
 module.exports = function caInit() {
   const spinner = ora('init root ca...').start();
@@ -13,7 +13,7 @@ module.exports = function caInit() {
   const existsCert = fs.existsSync(`${BASE_DIR}/${CA_PREFIX}_rootCA.crt`);
 
   if (!existsPrivateKey || !existsPublicKey || !existsCert) {
-    execSync(`rm -rf ${BASE_DIR}/ssl`);
+    execSync(`rm -rf ${SSL_DIR} && mkdir ${SSL_DIR}`);
     createRootCA();
   }
 

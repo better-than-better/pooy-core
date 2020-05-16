@@ -3,6 +3,10 @@ const { fork } = require('child_process');
 const compareVersions = require('compare-versions');
 const isSupportWorkder = compareVersions(process.version.slice(1), '10.5.0') >= 0;
 
+if (!isSupportWorkder) {
+  console.log(`\n🌈🌈🌈 A higher version of nodejs(>= 10.5.0) is recommended. 🚧 Current is ${process.version}\n`);
+}
+
 class Rebot extends EventEmitter{
   constructor() {
     super();
